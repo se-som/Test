@@ -1,2 +1,39 @@
 <?php
-echo 'category profile view page';
+// module/Job/view/Job/Category/index.phtml:
+
+$title = 'My category';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<table class="table table-hover">
+<tbody>
+    
+<?php 
+foreach ($categories as $category) :?>
+    <tr>
+    <td><?php echo $this->escapeHtml($category->cat_name);?></td>
+	<td>
+        <!-- edit and delete jobs 
+        <a href="<?php //echo $this->url('category/edit/2',array(
+          //  'action'=>'edit', 'id' => $category->cat_id));?>">Edit</a>
+        <!--
+        <a href="<?php// echo $this->url('category/delete/4',array(
+           // 'action'=>'delete', 'id' => $category->cat_id));?>">Delete</a> -->   
+    </td>
+    </tr>
+    
+<?php endforeach; ?>
+   
+    </tbody>
+</table>
+
+   <p>
+    <a href="<?php echo $this->url('category/add', array('action'=>'add'));?>">Add new category</a>
+</p>
+    
+   
+ 
+    
+    
+    
+        

@@ -1,2 +1,33 @@
 <?php
-echo 'add category view page';
+// module/Job/view/Job/Category/add.phtml:
+
+$title = 'Add new category';
+$this->headTitle($title);
+?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('category/add', array('action' => 'add')));
+$form->prepare();
+
+echo '<div class="label">';
+echo '<h2 class ="ui-widget-header">';
+    echo $this->escapeHtml($title);
+echo '</h2>';
+
+//echo'<form class="form-horizontal">';
+echo $this->form()->openTag($form);
+
+  echo '<div class="control-group">';
+    echo '<label class="control-label">Category:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('cat_name'));
+        echo '</div>';
+    echo '</div>';
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+echo '</div>';
+
+
+?>
+<!-- <style>.labels{text-align: right}</style> -->

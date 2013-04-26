@@ -1,0 +1,47 @@
+
+CREATE TABLE company (
+  com_id int(11) NOT NULL auto_increment,
+  com_name varchar(100) NOT NULL,
+  com_phone varchar(100) NOT NULL,
+  com_email varchar(100) NOT NULL,
+  com_web varchar(100) NOT NULL,
+  PRIMARY KEY (com_id)
+)ENGINE=InnoDB;
+
+CREATE TABLE category (
+  cat_id int(11) NOT NULL auto_increment,
+  cat_name varchar(250) NOT NULL,
+  PRIMARY KEY (cat_id)
+)ENGINE=InnoDB;
+
+CREATE TABLE company_category (
+  com_cat_id int(11) NOT NULL auto_increment,
+  com_id int(11) NOT NULL,
+  cat_id int(11) NOT NULL,
+  PRIMARY KEY (com_cat_id),
+  INDEX (com_id),
+  INDEX (cat_id),
+  FOREIGN KEY(com_id) REFERENCES company(com_id) ON DELETE CASCADE,
+  FOREIGN KEY(cat_id) REFERENCES category(cat_id) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE subject (
+  sub_id int(11) NOT NULL auto_increment,
+  com_cat_id int(11) NOT NULL,
+  sub_name varchar(100) NOT NULL,
+  percentage int(11) NULL,
+  PRIMARY KEY (sub_id),
+  FOREIGN KEY(com_cat_id) REFERENCES company_category(com_cat_id) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE jobs (
+  job_id int(11) NOT NULL auto_increment,
+  com_cat_id int(11) NOT NULL,
+  com_date varchar(100) NOT NULL,
+  message varchar(100) NOT NULL,
+  salary varchar(250) NULL,
+  PRIMARY KEY (job_id),
+  FOREIGN KEY(com_cat_id) REFERENCES company_category(com_cat_id) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+ 
