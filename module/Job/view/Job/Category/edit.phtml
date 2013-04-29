@@ -19,7 +19,7 @@ echo '<h2 class ="ui-widget-header">';
     echo $this->escapeHtml($title);
 echo '</h2>';
 echo $this->form()->openTag($form);
-
+echo $this->formRow($form->get('cat_id'));
  echo '<div class="control-group">';
     echo '<label class="control-label">Category:</label>';
         echo '<div class="controls">';

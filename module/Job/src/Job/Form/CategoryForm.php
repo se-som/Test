@@ -15,6 +15,12 @@ class CategoryForm extends Form
                 'type'  => 'hidden',
             ),
         ));
+		$this->add(array(
+            'name' => 'cat_id',
+            'attributes' => array(
+                'type'  => 'hidden',
+            ),             
+        ));
         $this->add(array(
             'name' => 'cat_name',
             'attributes' => array(
