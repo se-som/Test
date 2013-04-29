@@ -31,6 +31,7 @@ class CategoryController extends AbstractActionController
         $request = $this->getRequest(); 
         if ($request->isPost()) {
             $category = new Category();
+            
             $form->setInputFilter($category->getInputFilter());
             $form->setData($request->getPost());
            if ($form->isValid()) {
@@ -45,16 +46,27 @@ class CategoryController extends AbstractActionController
     // action edit category
     public function editAction()
     {
-        $cat_id = (int) $this->params()->fromRoute('id', 0);
-        if (!$cat_id) {
+        $cat_id = (int) $this->params()->fromRoute('id', 1);
+        if (!$cat_id) 
+            {
+                return $this->redirect()->toRoute('category', array(
+                    'action' => 'add'
+                ));
+            }
+         try {
+            $category = $this->getcategoryTable()->getCategory($cat_id);
+        }
+        catch (\Exception $ex) {
             return $this->redirect()->toRoute('category', array(
-                'action' => 'add'
+                'action' => 'index',
             ));
         }
-        $category = $this->getCategoryTable()->getCategory($cat_id);
+        
+       // $category = $this->getCategoryTable()->getCategory($cat_id);
         $form  = new CategoryForm();
         $form->bind($category);
         $form->get('submit')->setAttribute('value', 'Edit');
+        
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setInputFilter($category->getInputFilter());
@@ -73,7 +85,7 @@ class CategoryController extends AbstractActionController
     // action delete category
     public function deleteAction()
     {
-        $cat_id = (int) $this->params()->fromRoute('cat_id', 0);
+        $cat_id = (int) $this->params()->fromRoute('id', 0);
         if (!$cat_id) {
             return $this->redirect()->toRoute('category');
         }
@@ -101,8 +113,5 @@ class CategoryController extends AbstractActionController
         return $this->categoryTable;
     }
    
-    public function shareAction()
-    {
-       
-    }
+   
 }

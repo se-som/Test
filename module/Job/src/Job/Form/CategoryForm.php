@@ -29,7 +29,7 @@ class CategoryForm extends Form
             'attributes' => array(
                 'type'  => 'submit',
                 'value' => 'Go',
-                'id' => 'submitbutton',
+                'cat_id' => 'submitbutton',
                 'class' => 'btn btn-success',
             ),
         ));
