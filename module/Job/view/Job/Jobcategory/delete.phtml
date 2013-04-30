@@ -1,0 +1,26 @@
+<?php
+// module/Job/view/Job/category/delete.phtml:
+
+$title = 'Delete job category';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>Are you sure that you want to delete
+    '<?php echo $this->escapeHtml($jobcategory->com_cat_id); ?>' by
+    '<?php echo $this->escapeHtml($jobcategory->com_id); ?>' and 
+    '<?php echo $this->escapeHtml($jobcategory->cat_id); ?>'?
+</p>
+<?php
+$url = $this->url('jobcategory/delete', array(
+    'action' => 'delete',
+    'id'     => $this->com_cat_id,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="com_cat_id" value="<?php echo (int) $jobcategory->com_cat_id; ?>" />
+    <input type="submit" name="del" value="Yes" />
+    <input type="submit" name="del" value="No" />
+</div>
+</form>

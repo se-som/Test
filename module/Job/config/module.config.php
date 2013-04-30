@@ -118,7 +118,68 @@ return array(
                     ),
             ),
             
-             // action list category
+             // action list job category
+            'jobcategory' => array(
+		'type' => 'Literal',
+		'options' => array(
+			'route' => '/jobcategory',
+			'defaults' => array(
+                             '__NAMESPACE__' => 'Job\Controller',
+				'controller' => 'Jobcategory',
+				'action' => 'index',
+			),
+                ),
+               'may_terminate' => true,
+                'child_routes' => array(    
+                    //action job category edit
+                    'edit' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/edit[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Jobcategory',
+                                            'action'     => 'edit',
+					),
+				),
+			),
+                        // action jobcategory/add
+			'add' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/add[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                                'controller' => 'Job\Controller\Jobcategory',
+						'action'     => 'add',
+					),
+				),
+			),
+                        // action jobcategory/ delete
+			'delete' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/delete[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Jobcategory',
+                                            'action'     => 'delete',
+					),
+				),
+			),
+                    ),
+            ),
+            
+            // action list category
             'category' => array(
 		'type' => 'Literal',
 		'options' => array(
@@ -178,6 +239,67 @@ return array(
 			),
                     ),
             ),
+            
+             // action list subject
+            'subject' => array(
+		'type' => 'Literal',
+		'options' => array(
+			'route' => '/subject',
+			'defaults' => array(
+                             '__NAMESPACE__' => 'Job\Controller',
+				'controller' => 'Subject',
+				'action' => 'index',
+			),
+                ),
+               'may_terminate' => true,
+                'child_routes' => array(    
+                    //action subject edit
+                    'edit' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/edit[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Subject',
+                                            'action'     => 'edit',
+					),
+				),
+			),
+                        // action subject/add
+			'add' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/add[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                                'controller' => 'Job\Controller\Subject',
+						'action'     => 'add',
+					),
+				),
+			),
+                        // action subject/ delete
+			'delete' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/delete[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Subject',
+                                            'action'     => 'delete',
+					),
+				),
+			),
+                    ),
+            ),
         ),
       ),
     'service_manager' => array(
@@ -199,7 +321,9 @@ return array(
         'invokables' => array(
             'Job\Controller\Company' => 'Job\Controller\CompanyController',
             'Job\Controller\Job' => 'Job\Controller\JobController',
-            'Job\Controller\Category' => 'Job\Controller\CategoryController'
+            'Job\Controller\Category' => 'Job\Controller\CategoryController',
+            'Job\Controller\Subject' => 'Job\Controller\SubjectController',
+            'Job\Controller\Jobcategory' => 'Job\Controller\JobcategoryController'
         ),
     ),
     'view_manager' => array(

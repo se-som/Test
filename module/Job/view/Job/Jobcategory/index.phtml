@@ -1,0 +1,40 @@
+<?php
+// module/Job/view/Job/Jobcategory/index.phtml:
+
+$title = 'My job category';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<table class="table table-hover">
+<tbody>
+
+<?php 
+foreach ($jobcategories as $jobcategory) :?>
+    <tr>
+    <td><?php echo $this->escapeHtml($jobcategory->com_id);?></td>
+    <td><?php echo $this->escapeHtml($jobcategory->cat_id);?></td>
+	<td>
+        <!-- edit and delete jobs -->
+        <a href="<?php echo $this->url('jobcategory/edit',array(
+            'action'=>'edit', 'id' => $jobcategory->com_cat_id));?>">Edit</a>
+       
+        <a href="<?php echo $this->url('jobcategory/delete',array(
+            'action'=>'delete', 'id' => $jobcategory->com_cat_id));?>">Delete</a>   
+    </td>
+    </tr>
+    
+<?php endforeach; ?>
+   
+    </tbody>
+</table>
+
+   <p>
+    <a href="<?php echo $this->url('jobcategory/add', array('action'=>'add'));?>">Add new job category of your company</a>
+</p>
+    
+   
+ 
+    
+    
+    
+        

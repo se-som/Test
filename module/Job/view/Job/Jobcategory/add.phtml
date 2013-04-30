@@ -1,0 +1,45 @@
+<?php
+// module/Job/view/Job/Jobcategory/add.phtml:
+
+$title = 'Add new job category';
+$this->headTitle($title);
+?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('jobcategory/add', array('action' => 'add')));
+$form->prepare();
+
+echo '<div class="label">';
+echo '<h2 class ="ui-widget-header">';
+    echo $this->escapeHtml($title);
+echo '</h2>';
+
+//echo'<form class="form-horizontal">';
+echo $this->form()->openTag($form); 
+echo '<select>';
+    foreach ($categories as $category) : ?>
+        <option value="<?php echo $category->cat_id; ?>"> <?php echo $row->cate_name; ?></option>
+        
+<?php endforeach;
+echo '</select>';
+  echo '<div class="control-group">';
+    echo '<label class="control-label">Company id:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('com_id'));
+        echo '</div>';
+    echo '</div>';
+    
+    echo '<div class="control-group">';
+    echo '<label class="control-label">Category id:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('cat_id'));
+        echo '</div>';
+    echo '</div>';
+    
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+echo '</div>';
+?>
+
+

@@ -1,0 +1,47 @@
+<?php
+// module/Job/view/Job/Subject/add.phtml:
+
+$title = 'Add new subject';
+$this->headTitle($title);
+?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('subject/add', array('action' => 'add')));
+$form->prepare();
+
+echo '<div class="label">';
+echo '<h2 class ="ui-widget-header">';
+    echo $this->escapeHtml($title);
+echo '</h2>';
+
+//echo'<form class="form-horizontal">';
+echo $this->form()->openTag($form);
+
+    echo '<div class="control-group">';
+    echo '<label class="control-label">com cat id :</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('com_cat_id'));
+        echo '</div>';
+    echo '</div>';
+    
+    echo '<div class="control-group">';
+    echo '<label class="control-label">Subject:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('sub_name'));
+        echo '</div>';
+    echo '</div>';
+    
+    echo '<div class="control-group">';
+    echo '<label class="control-label">Subject:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('percentage'));
+        echo '</div>';
+    echo '</div>';
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+echo '</div>';
+
+
+?>
+<!-- <style>.labels{text-align: right}</style> -->

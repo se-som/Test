@@ -13,6 +13,10 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Job\Model\Category;
 use Job\Model\CategoryTable;
+use Job\Model\Subject;
+use Job\Model\SubjectTable;
+use Job\Model\Jobcategory;
+use Job\Model\JobcategoryTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -60,6 +64,29 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Category());
                     return new TableGateway('Category', $dbAdapter, null, $resultSetPrototype);
                 },
+                 'Job\Model\SubjectTable' =>  function($sm) {
+                    $tableGateway = $sm->get('SubjectTableGateway');
+                    $table = new SubjectTable($tableGateway);
+                    return $table;
+                },
+                'SubjectTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Subject());
+                    return new TableGateway('Subject', $dbAdapter, null, $resultSetPrototype);
+                }, 
+                'Job\Model\JobcategoryTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JobcategoryTableGateway');
+                    $table = new JobcategoryTable($tableGateway);
+                    return $table;
+                },
+                'JobcategoryTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Jobcategory());
+                    return new TableGateway('Jobcategory', $dbAdapter, null, $resultSetPrototype);
+                },
+                        
             ),
         );
     }
