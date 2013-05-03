@@ -11,7 +11,7 @@ $this->headTitle($title);
 <?php 
 foreach ($categories as $category) :?>
     <tr>
-    <td><?php echo $this->escapeHtml($category->cat_name);?></td>
+        <td><?php echo $this->escapeHtml($category->cat_name);?></td>
 	<td>
         <!-- edit and delete jobs -->
         <a href="<?php echo $this->url('category/edit',array(
@@ -30,6 +30,10 @@ foreach ($categories as $category) :?>
    <p>
     <a href="<?php echo $this->url('category/add', array('action'=>'add'));?>">Add new category</a>
 </p>
+    
+
+   
+
     
    
  

@@ -10,17 +10,23 @@
 namespace Job\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Job\Model\Jobcategory;        
+use Job\Model\Jobcategory;
+use Job\Model\Category;
+use Job\Form\CategoryForm;
 use Job\Form\JobcategoryForm;       
 
 class JobcategoryController extends AbstractActionController
 {
     protected $jobcategoryTable;
+    protected $categoryTable;
     // view job category list in file index
     public function indexAction()
     {
         return new ViewModel(array(
-            'jobcategories' => $this->getJobcategoryTable()->fetchAll(),
+                'dd' =>array(
+                    'jobcategories' => $this->getJobcategoryTable()->fetchAll(),
+                    'categories' => $this->getCategoryTable()->fetchAll(),
+            )
         ));
     }
     // action add job category  
@@ -41,7 +47,13 @@ class JobcategoryController extends AbstractActionController
                 return $this->redirect()->toRoute('jobcategory');
             }
         }
-        return array('form' => $form);
+        return array(
+            'form' => $form,
+            'dd' =>array(
+                    'jobcategories' => $this->getJobcategoryTable()->fetchAll(),
+                    'categories' => $this->getCategoryTable()->fetchAll(),
+            )
+            );
     }
     // action edit job category
     public function editAction()
@@ -80,6 +92,7 @@ class JobcategoryController extends AbstractActionController
         return array(
             'id' => $com_cat_id,
             'form' => $form,
+            
         );
     }
     // action delete job category
@@ -111,6 +124,14 @@ class JobcategoryController extends AbstractActionController
             $this->jobcategoryTable = $sm->get('Job\Model\JobcategoryTable');
         }
         return $this->jobcategoryTable;
+    }
+    public function getCategoryTable()
+    {
+        if (!$this->categoryTable) {
+            $sm = $this->getServiceLocator();
+            $this->categoryTable = $sm->get('Job\Model\CategoryTable');
+        }
+        return $this->categoryTable;
     }
    
    

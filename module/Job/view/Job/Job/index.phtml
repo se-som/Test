@@ -1,2 +1,46 @@
 <?php
-echo 'job profile view page';
+// module/Job/view/Job/Job/index.phtml:
+
+$title = 'My job';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<table class="table table-hover">
+<tbody>
+
+<?php 
+foreach ($jobs as $job) :?>
+    <tr>
+        <td><?php echo $this->escapeHtml($job->com_id);?></td>
+        <td><?php echo $this->escapeHtml($job->cat_id);?></td>
+        <td><?php echo $this->escapeHtml($job->job_deadline);?></td>
+        <td><?php echo $this->escapeHtml($job->job_description);?></td>
+	<td>
+        <!-- edit and delete jobs -->
+        <a href="<?php echo $this->url('jobs/edit',array(
+            'action'=>'edit', 'id' => $job->job_id));?>">Edit</a>
+       
+        <a href="<?php echo $this->url('jobs/delete',array(
+            'action'=>'delete', 'id' => $job->job_id));?>">Delete</a>   
+    </td>
+    </tr>
+    
+<?php endforeach; ?>
+   
+    </tbody>
+</table>
+
+   <p>
+    <a href="<?php echo $this->url('jobs/add', array('action'=>'add'));?>">Add new job</a>
+</p>
+    
+
+   
+
+    
+   
+ 
+    
+    
+    
+        

@@ -10,7 +10,7 @@
 namespace Job\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Job\Model\Category;        
+use Job\Model\Category;    
 use Job\Form\CategoryForm;       
 
 class CategoryController extends AbstractActionController

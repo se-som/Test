@@ -15,6 +15,8 @@ use Job\Model\Category;
 use Job\Model\CategoryTable;
 use Job\Model\Subject;
 use Job\Model\SubjectTable;
+use Job\Model\Jobs;
+use Job\Model\JobsTable;
 use Job\Model\Jobcategory;
 use Job\Model\JobcategoryTable;
 use Zend\Db\ResultSet\ResultSet;
@@ -85,6 +87,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Jobcategory());
                     return new TableGateway('Jobcategory', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Job\Model\JobsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JobsTableGateway');
+                    $table = new JobsTable($tableGateway);
+                    return $table;
+                },
+                'JobsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Jobs());
+                    return new TableGateway('Jobs', $dbAdapter, null, $resultSetPrototype);
                 },
                         
             ),

@@ -25,6 +25,84 @@ return array(
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
            
+            
+            // action list job
+            'jobs' => array(
+		'type' => 'Literal',
+		'options' => array(
+			'route' => '/jobs',
+			'defaults' => array(
+                             '__NAMESPACE__' => 'Job\Controller',
+				'controller' => 'Job',
+				'action' => 'index',
+			),
+                ),
+               'may_terminate' => true,
+                'child_routes' => array(
+                        
+                    //action Job edit
+                    'edit' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/edit[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Job',
+                                            'action'     => 'edit',
+					),
+				),
+			),
+                        // action job/add
+			'add' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/add[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                                'controller' => 'Job\Controller\Job',
+						'action'     => 'add',
+					),
+				),
+			),
+                        // action job/delete
+			'delete' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/delete[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Job',
+                                            'action'     => 'delete',
+					),
+				),
+			),
+                        // action company/detail
+                        'detail' => array(
+                            'type'    => 'segment',
+                            'options' => array(
+                                    'route'    => '/detail[/:action][/:id]',
+                                    'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+                                    ),
+                                    'defaults' => array(
+						'controller' => 'Job\Controller\Job',
+						'action'     => 'detail',
+                                    ),
+				),
+			),
+                    
+                    ),
+            ),
                 
             // action list company
             'company' => array(
