@@ -5,6 +5,7 @@ use Zend\Db\TableGateway\TableGateway;
 class JobcategoryTable
 {
     protected $tableGateway;
+     protected $_table;
 
     public function __construct(TableGateway $tableGateway)
     {
@@ -23,11 +24,13 @@ class JobcategoryTable
         $com_cat_id  = (int) $com_cat_id;
         $rowset = $this->tableGateway->select(array('com_cat_id' => $com_cat_id));
         $row = $rowset->current();
+       
         if (!$row) {
             throw new \Exception("Could not find row $com_cat_id");
-        }
-        return $row;
+        }   
+        return $row;   
     }
+   
 
     public function saveJobcategory(Jobcategory $jobcategory)
     {

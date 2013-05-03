@@ -24,22 +24,19 @@ echo $this->form()->openTag($form);
         echo '</div>';
     echo '</div>';
     
-    echo $this->form()->openTag($form); 
-  echo '<div class="control-group">';
-    echo '<label class="control-label">category id:</label>';
-        echo '<div class="controls">';
-            echo $this->formRow($form->get('cat_id'));
-        echo '</div>';
-    echo '</div>';
-    
-    echo $this->form()->openTag($form); 
+   echo '<select name="cat_id">';
+    foreach ($dd['categories'] as $category) : ?>
+        <option  value=" <?php echo $this->escapeHtml($category->cat_id); ?> "> <?php echo $this->escapeHtml($category->cat_name); ?> </option>
+    <?php endforeach;
+    echo '</select>';
+   
   echo '<div class="control-group">';
     echo '<label class="control-label">job deadline:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('job_deadline'));
         echo '</div>';
     echo '</div>';
-    echo $this->form()->openTag($form); 
+    
   echo '<div class="control-group">';
     echo '<label class="control-label">job description:</label>';
         echo '<div class="controls">';

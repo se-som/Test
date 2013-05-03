@@ -9,7 +9,7 @@ $this->headTitle($title);
 <tbody>
    
 <?php 
-foreach ($dd['jobcategories'] as $jobcategory) :?>
+foreach ($jobcategories as $jobcategory) :?>
     <tr>
     <td><?php echo $this->escapeHtml($jobcategory->com_id);?></td>
     <td><?php echo $this->escapeHtml($jobcategory->cat_id);?></td>
@@ -21,13 +21,6 @@ foreach ($dd['jobcategories'] as $jobcategory) :?>
         <a href="<?php echo $this->url('jobcategory/delete',array(
             'action'=>'delete', 'id' => $jobcategory->com_cat_id));?>">Delete</a>   
     </td>
-    </tr>  
-<?php endforeach; ?>
-    
-  <?php  foreach ($dd['categories'] as $category) :?>
-    <tr>
-    <td><?php echo $this->escapeHtml($category->cat_id);?></td>
-    <td><?php echo $this->escapeHtml($category->cat_name);?></td>
     </tr>  
 <?php endforeach; ?>
     

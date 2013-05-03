@@ -40,12 +40,15 @@ class JobForm extends Form
         
         $this->add(array(
             'name' => 'job_deadline',
+            'type' => 'Zend\Form\Element\Date',
             'attributes' => array(
-                'type' => 'Zend\Form\Element\Date',
+		'class' => 'date',
+		'id' => 'endDate',
                 'min' => '2012-01-01',
                 'max' => '2020-01-01',
-              'step' => '1', // days; default step interval is 1 day
-     ),
+                'step' => '1'
+	),
+         
  ));
         
         

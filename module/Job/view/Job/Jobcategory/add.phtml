@@ -17,16 +17,17 @@ echo '</h2>';
 
 //echo'<form class="form-horizontal">';
 echo $this->form()->openTag($form); 
-echo '<select name="cat_id">';
-    foreach ($dd['categories'] as $category) : ?>
-        <option  value=" <?php echo $this->escapeHtml($category->cat_id); ?> "> <?php echo $this->escapeHtml($category->cat_name); ?> </option>
-<?php endforeach;
-echo '</select>';
 
   echo '<div class="control-group">';
     echo '<label class="control-label">Company id:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('com_id'));
+        echo '</div>';
+    echo '</div>';
+    echo '<div class="control-group">';
+    echo '<label class="control-label">Company id:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('cat_id'));
         echo '</div>';
     echo '</div>';
     

@@ -10,12 +10,16 @@
 namespace Job\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Job\Model\Jobcategory;
 use Job\Model\Jobs;    
 use Job\Form\JobForm;
 
 class JobController extends AbstractActionController
 {
     protected $jobTable;
+    protected $jobcategoryTable;
+    protected $categoryTable;
+
     // view job list in file index
     public function indexAction()
     {
@@ -30,18 +34,40 @@ class JobController extends AbstractActionController
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest(); 
         if ($request->isPost()) {
-            $jobs = new Jobs();
             
-            $form->setInputFilter($jobs->getInputFilter());
+            
+            $jobs = new Jobs();
+            $jobcategory= new Jobcategory();
+            
+            
+            //$form->setInputFilter($jobs->getInputFilter());
+            $form->setInputFilter($jobcategory->getInputFilter());
+            
+            
+            
             $form->setData($request->getPost());
            if ($form->isValid()) {
+               
+               
                 $jobs->exchangeArray($form->getData());
+                $jobcategory->exchangeArray($form->getData());
+                
+                
                 $this->getJobsTable()->saveJobs($jobs);
+                $this->getJobcategoryTable()->saveJobcategory($jobcategory);
+                
+               //$this->getJobcategoryTable()->saveJobcategory();
                 // Redirect to list of job again
                 return $this->redirect()->toRoute('jobs');
             }
         }
-        return array('form' => $form);
+        return array(
+            'form' => $form,
+            'dd' =>array(
+                    'jobs' => $this->getJobsTable()->fetchAll(),
+                    'categories' => $this->getCategoryTable()->fetchAll(),
+            )
+            );
     }
     // action edit job
     public function editAction()
@@ -79,7 +105,7 @@ class JobController extends AbstractActionController
         return array(
             'id' => $job_id,
             'form' => $form,
-        );
+            );
     }
     // action delete job
     public function deleteAction()
@@ -111,6 +137,21 @@ class JobController extends AbstractActionController
         }
         return $this->jobTable;
     }
-   
+   public function getJobcategoryTable()
+    {
+        if (!$this->jobcategoryTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobcategoryTable = $sm->get('Job\Model\JobcategoryTable');
+        }
+        return $this->jobcategoryTable;
+    }
+    public function getCategoryTable()
+    {
+        if (!$this->categoryTable) {
+            $sm = $this->getServiceLocator();
+            $this->categoryTable = $sm->get('Job\Model\CategoryTable');
+        }
+        return $this->categoryTable;
+    }
    
 }

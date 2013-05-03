@@ -11,8 +11,6 @@ namespace Job\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Job\Model\Jobcategory;
-use Job\Model\Category;
-use Job\Form\CategoryForm;
 use Job\Form\JobcategoryForm;       
 
 class JobcategoryController extends AbstractActionController
@@ -23,10 +21,8 @@ class JobcategoryController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel(array(
-                'dd' =>array(
-                    'jobcategories' => $this->getJobcategoryTable()->fetchAll(),
-                    'categories' => $this->getCategoryTable()->fetchAll(),
-            )
+                    'jobcategories' => $this->getJobcategoryTable()->fetchAll(),      
+            
         ));
     }
     // action add job category  
@@ -49,10 +45,6 @@ class JobcategoryController extends AbstractActionController
         }
         return array(
             'form' => $form,
-            'dd' =>array(
-                    'jobcategories' => $this->getJobcategoryTable()->fetchAll(),
-                    'categories' => $this->getCategoryTable()->fetchAll(),
-            )
             );
     }
     // action edit job category
@@ -125,14 +117,7 @@ class JobcategoryController extends AbstractActionController
         }
         return $this->jobcategoryTable;
     }
-    public function getCategoryTable()
-    {
-        if (!$this->categoryTable) {
-            $sm = $this->getServiceLocator();
-            $this->categoryTable = $sm->get('Job\Model\CategoryTable');
-        }
-        return $this->categoryTable;
-    }
+    
    
    
 }
