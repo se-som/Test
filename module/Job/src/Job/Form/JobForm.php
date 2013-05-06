@@ -15,12 +15,14 @@ class JobForm extends Form
                 'type'  => 'hidden',
             ),
         ));
-		$this->add(array(
+        
+	$this->add(array(
             'name' => 'job_id',
             'attributes' => array(
                 'type'  => 'hidden',
             ),             
         ));
+        
         $this->add(array(
             'name' => 'com_id',
             'attributes' => array(
@@ -29,6 +31,7 @@ class JobForm extends Form
                 'class' => 'input-xlarge'
             ),             
         ));
+        
         $this->add(array(
             'name' => 'cat_id',
             'attributes' => array(
@@ -42,28 +45,23 @@ class JobForm extends Form
             'name' => 'job_deadline',
             'type' => 'Zend\Form\Element\Date',
             'attributes' => array(
-		'class' => 'date',
-		'id' => 'endDate',
+                'class' => 'date',
+                'id' => 'endDate',
                 'min' => '2012-01-01',
                 'max' => '2020-01-01',
                 'step' => '1'
-	),
-         
- ));
+	),   
+        ));
         
-        
-        
-        
-      
         $this->add(array(
             'name' => 'job_description',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'textarea',
                 'placeholder' => 'job description',
                 'class' => 'input-xlarge'
             ),             
         ));
-     		
+ 		
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

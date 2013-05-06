@@ -30,7 +30,6 @@ class JobcategoryTable
         }   
         return $row;   
     }
-   
 
     public function saveJobcategory(Jobcategory $jobcategory)
     {

@@ -22,7 +22,6 @@ class JobcategoryController extends AbstractActionController
     {
         return new ViewModel(array(
                     'jobcategories' => $this->getJobcategoryTable()->fetchAll(),      
-            
         ));
     }
     // action add job category  
