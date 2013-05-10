@@ -19,6 +19,8 @@ use Job\Model\Jobs;
 use Job\Model\JobsTable;
 use Job\Model\Jobcategory;
 use Job\Model\JobcategoryTable;
+use Job\Model\Percentage;
+use Job\Model\PercentageTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -64,7 +66,7 @@ class Module
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Category());
-                    return new TableGateway('Category', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('B_category', $dbAdapter, null, $resultSetPrototype);
                 },
                  'Job\Model\SubjectTable' =>  function($sm) {
                     $tableGateway = $sm->get('SubjectTableGateway');
@@ -75,7 +77,7 @@ class Module
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Subject());
-                    return new TableGateway('Subject', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('B_subject', $dbAdapter, null, $resultSetPrototype);
                 }, 
                 'Job\Model\JobcategoryTable' =>  function($sm) {
                     $tableGateway = $sm->get('JobcategoryTableGateway');
@@ -86,7 +88,7 @@ class Module
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Jobcategory());
-                    return new TableGateway('Jobcategory', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('B_jobcategory', $dbAdapter, null, $resultSetPrototype);
                 },
                 'Job\Model\JobsTable' =>  function($sm) {
                     $tableGateway = $sm->get('JobsTableGateway');
@@ -97,9 +99,19 @@ class Module
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Jobs());
-                    return new TableGateway('Jobs', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('B_jobs', $dbAdapter, null, $resultSetPrototype);
+                }, 
+                'Job\Model\PercentageTable' =>  function($sm) {
+                    $tableGateway = $sm->get('PercentageTableGateway');
+                    $table = new PercentageTable($tableGateway);
+                    return $table;
                 },
-                        
+                'PercentageTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Percentage());
+                    return new TableGateway('B_percentage', $dbAdapter, null, $resultSetPrototype);
+                },   
             ),
         );
     }

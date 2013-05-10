@@ -100,7 +100,6 @@ return array(
                                     ),
 				),
 			),
-                    
                     ),
             ),
                 
@@ -257,7 +256,7 @@ return array(
                     ),
             ),
             
-            // action list category
+             // action list category
             'category' => array(
 		'type' => 'Literal',
 		'options' => array(
@@ -270,7 +269,7 @@ return array(
                 ),
                'may_terminate' => true,
                 'child_routes' => array(    
-                    //action category edit
+                    //action job category edit
                     'edit' => array(
 				'type'    => 'segment',
 				'options' => array(
@@ -285,7 +284,7 @@ return array(
 					),
 				),
 			),
-                        // action category/add
+                        // action jobcategory/add
 			'add' => array(
 				'type'    => 'segment',
 				'options' => array(
@@ -300,7 +299,7 @@ return array(
 					),
 				),
 			),
-                        // action category/ delete
+                        // action jobcategory/ delete
 			'delete' => array(
 				'type'    => 'segment',
 				'options' => array(
@@ -315,6 +314,143 @@ return array(
 					),
 				),
 			),
+                    ),
+            ),
+            
+            // action list percentage
+            'percentage' => array(
+		'type' => 'Literal',
+		'options' => array(
+			'route' => '/percentage',
+			'defaults' => array(
+                             '__NAMESPACE__' => 'Job\Controller',
+				'controller' => 'Percentage',
+				'action' => 'index',
+			),
+                ),
+               'may_terminate' => true,
+                'child_routes' => array(    
+                    //action percentage edit
+                    'edit' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/edit[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Percentage',
+                                            'action'     => 'edit',
+					),
+				),
+			),
+                        // action percentage/add
+			'add' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/add[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                                'controller' => 'Job\Controller\Percentage',
+						'action'     => 'add',
+					),
+				),
+			),
+                        // action percentage/ delete
+			'delete' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/delete[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\percentage',
+                                            'action'     => 'delete',
+					),
+				),
+			),
+                    ),
+            ),
+            'jobs' => array(
+		'type' => 'Literal',
+		'options' => array(
+			'route' => '/jobs',
+			'defaults' => array(
+                             '__NAMESPACE__' => 'Job\Controller',
+				'controller' => 'Job',
+				'action' => 'index',
+			),
+                ),
+               'may_terminate' => true,
+                'child_routes' => array(
+                        
+                    //action Job edit
+                    'edit' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/edit[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Job',
+                                            'action'     => 'edit',
+					),
+				),
+			),
+                        // action job/add
+			'add' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/add[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                                'controller' => 'Job\Controller\Job',
+						'action'     => 'add',
+					),
+				),
+			),
+                        // action job/delete
+			'delete' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/delete[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Job',
+                                            'action'     => 'delete',
+					),
+				),
+			),
+                        // action company/detail
+                        'detail' => array(
+                            'type'    => 'segment',
+                            'options' => array(
+                                    'route'    => '/detail[/:action][/:id]',
+                                    'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+                                    ),
+                                    'defaults' => array(
+						'controller' => 'Job\Controller\Job',
+						'action'     => 'detail',
+                                    ),
+				),
+			),
+                    
                     ),
             ),
             
@@ -401,7 +537,8 @@ return array(
             'Job\Controller\Job' => 'Job\Controller\JobController',
             'Job\Controller\Category' => 'Job\Controller\CategoryController',
             'Job\Controller\Subject' => 'Job\Controller\SubjectController',
-            'Job\Controller\Jobcategory' => 'Job\Controller\JobcategoryController'
+            'Job\Controller\Jobcategory' => 'Job\Controller\JobcategoryController',
+            'Job\Controller\Percentage' => 'Job\Controller\PercentageController'
         ),
     ),
     'view_manager' => array(

@@ -32,9 +32,8 @@ class SubjectTable
     public function saveSubject(Subject $subject)
     {
         $data = array(
-            'com_cat_id' => $subject->com_cat_id,
+            'cat_id' => $subject->cat_id,
             'sub_name' => $subject->sub_name,
-            'percentage' => $subject->percentage,
         );
         
         $sub_id = (int)$subject->sub_id;

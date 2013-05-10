@@ -10,108 +10,122 @@
 namespace Job\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Job\Model\Subject;   
-//use Job\Model\Category; 
-use Job\Form\SubjectForm;       
+use Job\Model\Percentage; 
+use Job\Model\Subject;
+use Job\Model\Category;
+use Job\Form\PercentageForm;       
 
-class SubjectController extends AbstractActionController
+class PercentageController extends AbstractActionController
 {
     protected $subjectTable;
-     protected $categoryTable;
+    protected $percentageTable;
+    protected $categoryTable;
+
     // view Subject list in file index
     public function indexAction()
     {
         return new ViewModel(array(
-            'subjects' => $this->getSubjectTable()->fetchAll(),
+            'percentages' => $this->getPercentageTable()->fetchAll(),
         ));
     }
     // action add Subject  
     public function addAction()
     {
-        $form = new SubjectForm();
+        $form = new PercentageForm();
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest(); 
         if ($request->isPost()) {
-            $subject = new Subject();
-            
-            $form->setInputFilter($subject->getInputFilter());
+            $percentage = new Percentage();
+           
+            $form->setInputFilter($percentage->getInputFilter());
             $form->setData($request->getPost());
            if ($form->isValid()) {
-                $subject->exchangeArray($form->getData());
-                $this->getSubjectTable()->saveSubject($subject);
+               
+                $percentage->exchangeArray($form->getData());
+                $this->getPercentageTable()->savePercentage($percentage);
                 // Redirect to list of Subject again
-                return $this->redirect()->toRoute('subject');
+                return $this->redirect()->toRoute('percentage');
             }
         }
         return array(
             'form' => $form,
             'dd' =>array(
-                    'subject' => $this->getSubjectTable()->fetchAll(),
-                    'categories' => $this->getCategoryTable()->fetchAll(),
+                'percentages' => $this->getPercentageTable()->fetchAll(),
+                'subjects' => $this->getSubjectTable()->fetchAll(),
+                'categories' => $this->getCategoryTable()->fetchAll(),
             )
             );
     }
     // action edit Subject
     public function editAction()
     {
-        $sub_id = (int) $this->params()->fromRoute('id', 1);
-        if (!$sub_id) 
+        $per_id = (int) $this->params()->fromRoute('id', 1);
+        if (!$per_id) 
             {
-                return $this->redirect()->toRoute('subject', array(
+                return $this->redirect()->toRoute('percentage', array(
                     'action' => 'add'
                 ));
             }
          try {
-            $subject = $this->getsubjectTable()->getSubject($sub_id);
+            $percentage = $this->getpercentageTable()->getPercentage($per_id);
         }
         catch (\Exception $ex) {
-            return $this->redirect()->toRoute('subject', array(
+            return $this->redirect()->toRoute('percentage', array(
                 'action' => 'index',
             ));
         }
         
        // $category = $this->getCategoryTable()->getCategory($cat_id);
-        $form  = new SubjectForm();
-        $form->bind($subject);
+        $form  = new PercentageForm();
+        $form->bind($percentage);
         $form->get('submit')->setAttribute('value', 'Edit');
         
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter($subject->getInputFilter());
+            $form->setInputFilter($percentage->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->getSubjectTable()->saveSubject($form->getData());
+                $this->getPercentageTable()->savePercentage($form->getData());
                 // Redirect to list of Subject
-                return $this->redirect()->toRoute('subject');
+                return $this->redirect()->toRoute('percentage');
             }
         }
         return array(
-            'id' => $sub_id,
+            'id' => $per_id,
             'form' => $form,
         );
     }
     // action delete Subject
     public function deleteAction()
     {
-        $sub_id = (int) $this->params()->fromRoute('id', 0);
-        if (!$sub_id) {
-            return $this->redirect()->toRoute('subject');
+        $per_id = (int) $this->params()->fromRoute('id', 0);
+        if (!$per_id) {
+            return $this->redirect()->toRoute('percentage');
         }
         $request = $this->getRequest();
         if ($request->isPost()) {
             $del = $request->getPost('del', 'No');
             if ($del == 'Yes') {
-                $sub_id = (int) $request->getPost('sub_id');
-                $this->getSubjectTable()->deleteSubject($sub_id);
+                $per_id = (int) $request->getPost('per_id');
+                $this->getPercentageTable()->deletePercentage($per_id);
             }
             // Redirect to list of Subject
-            return $this->redirect()->toRoute('subject');
+            return $this->redirect()->toRoute('percentage');
         }
         return array(
-            'sub_id'    => $sub_id,
-            'subject' => $this->getSubjectTable()->getSubject($sub_id)
+            'per_id'    => $per_id,
+            'percentage' => $this->getPercentageTable()->getPercentage($per_id)
         );
     }
+    public function getPercentageTable()
+    {
+        if (!$this->percentageTable) {
+            $sm = $this->getServiceLocator();
+            $this->percentageTable = $sm->get('Job\Model\PercentageTable');
+        }
+        return $this->percentageTable;
+    }  
+   
     public function getSubjectTable()
     {
         if (!$this->subjectTable) {
@@ -119,8 +133,8 @@ class SubjectController extends AbstractActionController
             $this->subjectTable = $sm->get('Job\Model\SubjectTable');
         }
         return $this->subjectTable;
-    }  
-     public function getCategoryTable()
+    }
+    public function getCategoryTable()
     {
         if (!$this->categoryTable) {
             $sm = $this->getServiceLocator();
@@ -128,4 +142,5 @@ class SubjectController extends AbstractActionController
         }
         return $this->categoryTable;
     }
+   
 }

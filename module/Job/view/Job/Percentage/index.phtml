@@ -1,0 +1,36 @@
+<?php
+// module/Job/view/Job/Pecentage/index.phtml:
+
+$title = 'My pecentage';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<table class="table table-hover">
+<tbody>
+
+<?php 
+foreach ($percentages as $percentage) :?>
+    <tr>
+    <td><?php echo $this->escapeHtml($percentage->sub_id);?></td>
+    <td><?php echo $this->escapeHtml($percentage->com_id);?></td>
+     <td><?php echo $this->escapeHtml($percentage->percentage);?></td>
+    <td>
+        <!-- edit and edit subject -->
+        <a href="<?php echo $this->url('percentage/edit',array(
+            'action'=>'edit', 'id' => $percentage->per_id));?>">Edit</a>
+       
+        <a href="<?php echo $this->url('percentage/delete',array(
+            'action'=>'delete', 'id' => $percentage->per_id));?>">Delete</a>   
+    </td>
+    </tr>
+    
+<?php endforeach; ?>
+   
+    </tbody>
+</table>
+
+   <p>
+    <a href="<?php echo $this->url('percentage/add', array('action'=>'add'));?>">Add new percentage</a>
+</p>    
+    
+        

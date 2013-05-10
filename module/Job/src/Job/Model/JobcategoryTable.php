@@ -5,7 +5,6 @@ use Zend\Db\TableGateway\TableGateway;
 class JobcategoryTable
 {
     protected $tableGateway;
-     protected $_table;
 
     public function __construct(TableGateway $tableGateway)
     {
@@ -28,7 +27,8 @@ class JobcategoryTable
         if (!$row) {
             throw new \Exception("Could not find row $com_cat_id");
         }   
-        return $row;   
+        return $row;  
+       // print_r($row);
     }
 
     public function saveJobcategory(Jobcategory $jobcategory)
@@ -54,4 +54,20 @@ class JobcategoryTable
     {
         $this->tableGateway->delete(array('com_cat_id' => $com_cat_id));
     }
+    
+    public function getLastInsertid(){
+       $lastid = $this->tableGateway->select();
+      // if(!$lastid){
+       foreach ($lastid as $id){
+       // for get last row
+       } 
+       foreach ($id as $ee){
+            //get id
+            return $ee;
+       }
+      // }  else {
+           
+         //  throw new \Exception('Form id does not exist');
+      // }
+    }  
 }

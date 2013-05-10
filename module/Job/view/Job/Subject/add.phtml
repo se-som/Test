@@ -17,12 +17,15 @@ echo '</h2>';
 
 //echo'<form class="form-horizontal">';
 echo $this->form()->openTag($form);
-
     echo '<div class="control-group">';
-    echo '<label class="control-label">com cat id :</label>';
+    echo '<label class="control-label">category id :</label>';
         echo '<div class="controls">';
-            echo $this->formRow($form->get('com_cat_id'));
-        echo '</div>';
+    echo '<select name="cat_id">';
+    foreach ($dd['categories'] as $category) : ?>
+        <option  value=" <?php echo $this->escapeHtml($category->cat_id); ?> "> <?php echo $this->escapeHtml($category->cat_name); ?> </option>
+    <?php endforeach;
+    echo '</select>';
+     echo '</div>';
     echo '</div>';
     
     echo '<div class="control-group">';
@@ -32,12 +35,6 @@ echo $this->form()->openTag($form);
         echo '</div>';
     echo '</div>';
     
-    echo '<div class="control-group">';
-    echo '<label class="control-label">Subject:</label>';
-        echo '<div class="controls">';
-            echo $this->formRow($form->get('percentage'));
-        echo '</div>';
-    echo '</div>';
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 echo '</div>';

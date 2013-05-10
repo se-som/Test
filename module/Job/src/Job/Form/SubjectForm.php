@@ -21,11 +21,12 @@ class SubjectForm extends Form
                 'type'  => 'hidden',
             ),             
         ));
-        $this->add(array(
-            'name' => 'com_cat_id',
+        
+         $this->add(array(
+            'name' => 'cat_id',
             'attributes' => array(
                 'type'  => 'text',
-                'placeholder' => 'com category id',
+                'placeholder' => 'category id',
                 'class' => 'input-xlarge'
             ),             
         ));
@@ -34,14 +35,6 @@ class SubjectForm extends Form
             'attributes' => array(
                 'type'  => 'text',
                 'placeholder' => 'subject',
-                'class' => 'input-xlarge'
-            ),             
-        ));
-        $this->add(array(
-            'name' => 'percentage',
-            'attributes' => array(
-                'type'  => 'text',
-                'placeholder' => 'percentage',
                 'class' => 'input-xlarge'
             ),             
         ));

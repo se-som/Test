@@ -2,40 +2,35 @@
 namespace Job\Form;
 use Zend\Form\Form;
 
-class JobForm extends Form
+class PercentageForm extends Form
 {
     public function __construct($name = Null )
     {
         // we want to ignore the name passed
-        parent::__construct('job');
+        parent::__construct('percentage');
         $this->setAttribute('method', 'post');
-        
-        
-        
-        
         $this->add(array(
-            'name' => 'job_id',
+            'name' => 'per_id',
             'attributes' => array(
                 'type'  => 'hidden',
             ),
         ));
-        
-	$this->add(array(
-            'name' => 'job_id',
+		$this->add(array(
+            'name' => 'per_id',
             'attributes' => array(
                 'type'  => 'hidden',
             ),             
         ));
         
-        $this->add(array(
-            'name' => 'jcat_id',
+         $this->add(array(
+            'name' => 'sub_id',
             'attributes' => array(
                 'type'  => 'text',
-                'placeholder' => 'job category id',
+                'placeholder' => 'subject id',
                 'class' => 'input-xlarge'
             ),             
         ));
-         $this->add(array(
+        $this->add(array(
             'name' => 'com_id',
             'attributes' => array(
                 'type'  => 'text',
@@ -43,36 +38,15 @@ class JobForm extends Form
                 'class' => 'input-xlarge'
             ),             
         ));
-        $this->add(array(
-            'name' => 'cat_id',
+         $this->add(array(
+            'name' => 'percentage',
             'attributes' => array(
                 'type'  => 'text',
-                'placeholder' => 'category id',
+                'placeholder' => 'percentage',
                 'class' => 'input-xlarge'
             ),             
         ));
-        
-        $this->add(array(
-            'name' => 'job_deadline',
-            'type' => 'Zend\Form\Element\Date',
-            'attributes' => array(
-                'class' => 'date',
-                'id' => 'endDate',
-                'min' => '2012-01-01',
-                'max' => '2020-01-01',
-                'step' => '1'
-	),   
-        ));
-        
-        $this->add(array(
-            'name' => 'job_description',
-            'attributes' => array(
-                'type'  => 'textarea',
-                'placeholder' => 'job description',
-                'class' => 'input-xlarge'
-            ),             
-        ));
-        
+     		
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

@@ -31,8 +31,7 @@ class JobcategoryController extends AbstractActionController
         $form->get('submit')->setValue('Add');
         $request = $this->getRequest(); 
         if ($request->isPost()) {
-            $jobcategory = new Jobcategory();
-            
+            $jobcategory = new Jobcategory();           
             $form->setInputFilter($jobcategory->getInputFilter());
             $form->setData($request->getPost());
            if ($form->isValid()) {

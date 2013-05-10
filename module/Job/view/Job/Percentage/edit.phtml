@@ -1,13 +1,13 @@
 <?php
-// module/Job/view/job/Subject/edit.phtml:
-$title = 'Edit Subject';
+// module/Job/view/job/Percentage/edit.phtml:
+$title = 'Edit percentage';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url(
-    'subject/edit',
+    'percentage/edit',
    array(
         'action' => 'edit',
         'id'     => $this->id,
@@ -19,19 +19,24 @@ echo '<h2 class ="ui-widget-header">';
     echo $this->escapeHtml($title);
 echo '</h2>';
 echo $this->form()->openTag($form);
-echo $this->formRow($form->get('sub_id'));
+echo $this->formRow($form->get('per_id'));
     
     echo '<div class="control-group">';
-    echo '<label class="control-label">category id</label>';
+    echo '<label class="control-label">subject id</label>';
         echo '<div class="controls">';
-            echo $this->formRow($form->get('cat_id'));
+            echo $this->formRow($form->get('sub_id'));
         echo '</div>';
     echo '</div>';
-    
     echo '<div class="control-group">';
-    echo '<label class="control-label">Subject:</label>';
+    echo '<label class="control-label">company id</label>';
         echo '<div class="controls">';
-            echo $this->formRow($form->get('sub_name'));
+            echo $this->formRow($form->get('com_id'));
+        echo '</div>';
+    echo '</div>';
+    echo '<div class="control-group">';
+    echo '<label class="control-label">Percentage:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('percentage'));
         echo '</div>';
     echo '</div>';
     

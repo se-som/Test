@@ -8,8 +8,8 @@ $this->headTitle($title);
 
 <p>Are you sure that you want to delete
     '<?php echo $this->escapeHtml($jobs->job_id); ?>' by
-    '<?php echo $this->escapeHtml($jobs->com_id); ?>' and 
-    '<?php echo $this->escapeHtml($jobs->cat_id); ?>'?
+    '<?php echo $this->escapeHtml($jobs->jcat_id); ?>'
+
 </p>
 <?php
 $url = $this->url('jobs/delete', array(

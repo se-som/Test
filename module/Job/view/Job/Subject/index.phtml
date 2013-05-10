@@ -11,10 +11,9 @@ $this->headTitle($title);
 <?php 
 foreach ($subjects as $subject) :?>
     <tr>
-    <td><?php echo $this->escapeHtml($subject->com_cat_id);?></td>
+    <td><?php echo $this->escapeHtml($subject->cat_id);?></td>
     <td><?php echo $this->escapeHtml($subject->sub_name);?></td>
-    <td><?php echo $this->escapeHtml($subject->percentage);?></td>
-	<td>
+    <td>
         <!-- edit and edit subject -->
         <a href="<?php echo $this->url('subject/edit',array(
             'action'=>'edit', 'id' => $subject->sub_id));?>">Edit</a>
@@ -31,13 +30,6 @@ foreach ($subjects as $subject) :?>
 
    <p>
     <a href="<?php echo $this->url('subject/add', array('action'=>'add'));?>">Add new subject</a>
-</p>
-
-
-    
-   
- 
-    
-    
+</p>    
     
         

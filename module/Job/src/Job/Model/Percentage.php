@@ -7,18 +7,20 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Subject implements InputFilterAwareInterface
+class Percentage implements InputFilterAwareInterface
 {
+    public $per_id;
     public $sub_id;
-    public $cat_id;
-    public $sub_name;
+    public $com_id;
+    public $percentage;
     protected $inputFilter;                       // <-- Add this variable
 
     public function exchangeArray($data)
     {
+        $this->per_id   = (isset($data['per_id']))   ? $data['per_id'] : null;
         $this->sub_id   = (isset($data['sub_id']))   ? $data['sub_id'] : null;
-        $this->cat_id   = (isset($data['cat_id']))   ? $data['cat_id'] : null;
-        $this->sub_name = (isset($data['sub_name'])) ? $data['sub_name'] : null;
+        $this->com_id = (isset($data['com_id'])) ? $data['com_id'] : null;
+         $this->percentage   = (isset($data['percentage']))   ? $data['percentage'] : null;
     }
 
     // get mothod add new subject
@@ -32,7 +34,7 @@ class Subject implements InputFilterAwareInterface
             $inputFilter = new InputFilter();
             $factory     = new InputFactory();
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'sub_id',
+                'name'     => 'per_id',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'Int'),
@@ -40,7 +42,25 @@ class Subject implements InputFilterAwareInterface
             )));
             
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'cat_id',
+                'name'     => 'sub_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 100,
+                        ),
+                    ),
+                ),
+            )));
+             $inputFilter->add($factory->createInput(array(
+                'name'     => 'com_id',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -58,7 +78,7 @@ class Subject implements InputFilterAwareInterface
                 ),
             )));
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'sub_name',
+                'name'     => 'percentage',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),

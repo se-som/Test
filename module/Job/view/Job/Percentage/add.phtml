@@ -1,0 +1,66 @@
+<?php
+// module/Job/view/Job/Percentage/add.phtml:
+
+$title = 'Add new percentage';
+$this->headTitle($title);
+?>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('percentage/add', array('action' => 'add')));
+$form->prepare();
+
+echo '<div class="label">';
+echo '<h2 class ="ui-widget-header">';
+    echo $this->escapeHtml($title);
+echo '</h2>';
+
+//echo'<form class="form-horizontal">';
+echo $this->form()->openTag($form); ?>
+ <?php    //foreach ($dd['categories'] as $category ){
+       // echo $this->escapeHtml($category->cat_id);
+   // } 
+    echo '<div class="control-group">';
+    echo '<label class="control-label">select categor id :</label>';
+        echo '<div class="controls">';
+    echo '<select>';
+    foreach ($dd['categories'] as $category) : ?>
+        <option  value="  "> <?php echo $this->escapeHtml($category->cat_name); ?> </option>
+    <?php endforeach;
+    echo '</select>';
+     echo '</div>';
+    echo '</div>';
+    
+    foreach ($dd['subjects'] as $subject){
+        $id=$this->escapeHtml($subject->cat_id);
+        
+        if($id==3){
+             echo '<div class="control-group">';
+    echo '<label class="control-label">'.$this->escapeHtml($subject->sub_name).':</label>';
+        echo '<div class="controls">';
+            echo '<input name ="percentage" type="tex">';
+        echo '</div>';
+    echo '</div>';
+    }
+    }
+    echo '<div class="control-group">';
+    echo '<label class="control-label">Percentage:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('sub_id'));
+        echo '</div>';
+    echo '</div>';
+     echo '<div class="control-group">';
+    echo '<label class="control-label">company id:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('com_id'));
+        echo '</div>';
+    echo '</div>';
+    
+    
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+echo '</div>';
+
+
+?>
+<!-- <style>.labels{text-align: right}</style> -->
+       

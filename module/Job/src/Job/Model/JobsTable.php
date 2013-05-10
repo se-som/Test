@@ -32,8 +32,7 @@ class JobsTable
     public function saveJobs(Jobs $jobs)
     {
         $data = array(
-            'com_id' => $jobs->com_id,
-            'cat_id' => $jobs->cat_id,
+            'jcat_id' => $jobs->jcat_id,
             'job_deadline' => $jobs->job_deadline,
             'job_description' => $jobs->job_description,
         );
@@ -53,5 +52,5 @@ class JobsTable
     public function deleteJobs($job_id)
     {
         $this->tableGateway->delete(array('job_id' => $job_id));
-    }
+    } 
 }

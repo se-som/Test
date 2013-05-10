@@ -11,56 +11,65 @@ namespace Job\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Job\Model\Jobcategory;
-use Job\Model\Jobs;    
+use Job\Model\Jobs;   
 use Job\Form\JobForm;
+use Job\Form\JobcategoryForm;
 
 class JobController extends AbstractActionController
 {
     protected $jobTable;
     protected $jobcategoryTable;
     protected $categoryTable;
+    protected $subjectTable;
 
     // view job list in file index
     public function indexAction()
     {
         return new ViewModel(array(
-            'jobs' => $this->getJobsTable()->fetchAll(),
+            'dd' =>array(
+                    'jobs' => $this->getJobsTable()->fetchAll(),
+                    'subjects' => $this->getSubjectTable()->fetchAll(),
+                    'lastid' =>  $this->getJobcategoryTable()-> getLastInsertid(),
+            )
         ));
     }
     // action add job  
     public function addAction()
     {
-        $form = new JobForm();
+         $form = new JobForm();
+        $form1 = new JobcategoryForm();
+       
+        
+        $form1->get('submit')->setValue('Add');
         $form->get('submit')->setValue('Add');
-        $request = $this->getRequest(); 
+        
+        $request = $this->getRequest();
+        
         if ($request->isPost()) {
             
-            
+            $jobcategory = new Jobcategory();  
             $jobs = new Jobs();
-            $jobcategory= new Jobcategory();
             
-            
-            //$form->setInputFilter($jobs->getInputFilter());
-            $form->setInputFilter($jobcategory->getInputFilter());
-            
-            
+            $form1->setInputFilter($jobcategory->getInputFilter());
+            $form->setInputFilter($jobs->getInputFilter());
             
             $form->setData($request->getPost());
-           if ($form->isValid()) {
+            $form1->setData($request->getPost());
+            
+           if ($form1->isValid()) {
                
+                $jobcategory->exchangeArray($form1->getData());
+                 $this->getJobcategoryTable()->saveJobcategory($jobcategory); 
                
-                $jobs->exchangeArray($form->getData());
-                $jobcategory->exchangeArray($form->getData());
-                
-                
-                $this->getJobsTable()->saveJobs($jobs);
-                $this->getJobcategoryTable()->saveJobcategory($jobcategory);
-                
-               //$this->getJobcategoryTable()->saveJobcategory();
-                // Redirect to list of job again
-                return $this->redirect()->toRoute('jobs');
-            }
+                    if($form->isValid()){
+                        $jobs->exchangeArray($form->getData());
+                        $this->getJobsTable()->saveJobs($jobs);
+                        
+                        return $this->redirect()->toRoute('jobs');
+                    }
+           }
         }
+        
         return array(
             'form' => $form,
             'dd' =>array(
@@ -152,6 +161,14 @@ class JobController extends AbstractActionController
             $this->categoryTable = $sm->get('Job\Model\CategoryTable');
         }
         return $this->categoryTable;
+    }
+     public function getSubjectTable()
+    {
+        if (!$this->subjectTable) {
+            $sm = $this->getServiceLocator();
+            $this->subjectTable = $sm->get('Job\Model\SubjectTable');
+        }
+        return $this->subjectTable;
     }
    
 }

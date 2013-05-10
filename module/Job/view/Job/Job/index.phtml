@@ -8,11 +8,9 @@ $this->headTitle($title);
 <table class="table table-hover">
 <tbody>
 
-<?php 
-foreach ($jobs as $job) :?>
+<?php foreach ($dd['jobs'] as $job) :?>
     <tr>
-        <td><?php echo $this->escapeHtml($job->com_id);?></td>
-        <td><?php echo $this->escapeHtml($job->cat_id);?></td>
+        <td><?php echo $this->escapeHtml($job->jcat_id);?></td>
         <td><?php echo $this->escapeHtml($job->job_deadline);?></td>
         <td><?php echo $this->escapeHtml($job->job_description);?></td>
 	<td>
@@ -35,31 +33,14 @@ foreach ($jobs as $job) :?>
 </p>
 
 
-    <div class="progress progress-info">
-    <div class="bar" style="width: 20%"></div>
-    </div>
-    <div class="progress progress-success">
-    <div class="bar" style="width: 40%"></div>
-    </div>
-    <div class="progress progress-warning">
-    <div class="bar" style="width: 60%"></div>
-    </div>
-    <div class="progress progress-danger">
-    <div class="bar" style="width: 80%"></div>
-    </div>
 
-    <div class="progress progress-info progress-striped">
-    <div class="bar" style="width: 20%"></div>
-    </div>
-    <div class="progress progress-success progress-striped">
-    <div class="bar" style="width: 40%"></div>
-    </div>
-    <div class="progress progress-warning progress-striped">
-    <div class="bar" style="width: 60%"></div>
-    </div>
-    <div class="progress progress-danger progress-striped">
-    <div class="bar" style="width: 80%"></div>
-    </div>
+
+
+    
+ 
+        
+        
+    
     
 
    

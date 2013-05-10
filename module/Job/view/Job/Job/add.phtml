@@ -15,22 +15,35 @@ echo '<h2 class ="ui-widget-header">';
     echo $this->escapeHtml($title);
 echo '</h2>';
 
-//echo'<form class="form-horizontal">';
 echo $this->form()->openTag($form); 
-  echo '<div class="control-group">';
+
+echo '<div class="control-group">';
     echo '<label class="control-label">company id:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('com_id'));
         echo '</div>';
     echo '</div>';
     
-   echo '<select name="cat_id">';
-    foreach ($dd['categories'] as $category) : ?>
+     echo '<div class="control-group">';
+    echo '<label class="control-label">category id:</label>';
+        echo '<div class="controls">';   
+        
+        echo '<select name="cat_id">';
+        foreach ($dd['categories'] as $category) : ?>
         <option  value=" <?php echo $this->escapeHtml($category->cat_id); ?> "> <?php echo $this->escapeHtml($category->cat_name); ?> </option>
-    <?php endforeach;
-    echo '</select>';
-   
-  echo '<div class="control-group">';
+        <?php endforeach;
+        echo '</select>';
+    
+    echo '</div>';
+    echo '</div>';
+echo '<div class="control-group">';
+    echo '<label class="control-label">job category id:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('jcat_id'));
+        echo '</div>';
+    echo '</div>';
+       
+    echo '<div class="control-group">';
     echo '<label class="control-label">job deadline:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('job_deadline'));
@@ -44,9 +57,9 @@ echo $this->form()->openTag($form);
         echo '</div>';
     echo '</div>';
     
-echo $this->formSubmit($form->get('submit'));
+    
+     
+   echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 echo '</div>';
-?>
-
-
+    ?>

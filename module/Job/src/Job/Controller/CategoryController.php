@@ -47,6 +47,7 @@ class CategoryController extends AbstractActionController
     public function editAction()
     {
         $cat_id = (int) $this->params()->fromRoute('id', 1);
+        echo $cat_id;
         if (!$cat_id) 
             {
                 return $this->redirect()->toRoute('category', array(
