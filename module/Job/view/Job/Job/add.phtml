@@ -36,12 +36,12 @@ echo '<div class="control-group">';
     
     echo '</div>';
     echo '</div>';
-echo '<div class="control-group">';
-    echo '<label class="control-label">job category id:</label>';
-        echo '<div class="controls">';
-            echo $this->formRow($form->get('jcat_id'));
-        echo '</div>';
-    echo '</div>';
+//echo '<div class="control-group">';
+//    echo '<label class="control-label">job category id:</label>';
+//        echo '<div class="controls">';
+//            echo $this->formRow($form->get('jcat_id'));
+//        echo '</div>';
+//    echo '</div>';
        
     echo '<div class="control-group">';
     echo '<label class="control-label">job deadline:</label>';
@@ -63,3 +63,8 @@ echo '<div class="control-group">';
 echo $this->form()->closeTag();
 echo '</div>';
     ?>
+<script type="text/javaScript">
+    $(function() {
+     $(".datepicker").datepicker();
+   });
+</script>>

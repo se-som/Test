@@ -10,7 +10,7 @@ use Zend\InputFilter\InputFilterInterface;
 class Jobs implements InputFilterAwareInterface
 {
     public $job_id;
-    public $jcat_id;
+//    public $jcat_id;
     public $job_deadline;
     public $job_description;
     protected $inputFilter;                       // <-- Add this variable
@@ -18,7 +18,7 @@ class Jobs implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->job_id   = (isset($data['job_id']))   ? $data['job_id']     : null;
-        $this->jcat_id = (isset($data['jcat_id'])) ? $data['jcat_id'] : null;
+ //       $this->jcat_id = (isset($data['jcat_id'])) ? $data['jcat_id'] : null;
         $this->job_deadline = (isset($data['job_deadline'])) ? $data['job_deadline'] : null;
         $this->job_description = (isset($data['job_description'])) ? $data['job_description'] : null;
     }
@@ -40,24 +40,24 @@ class Jobs implements InputFilterAwareInterface
                     array('name' => 'Int'),
                 ),
             )));
-            $inputFilter->add($factory->createInput(array(
-                'name'     => 'jcat_id',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
-            )));
+//            $inputFilter->add($factory->createInput(array(
+//                'name'     => 'jcat_id',
+//                'required' => true,
+//                'filters'  => array(
+//                    array('name' => 'StripTags'),
+//                    array('name' => 'StringTrim'),
+//                ),
+//                'validators' => array(
+//                    array(
+//                        'name'    => 'StringLength',
+//                        'options' => array(
+//                            'encoding' => 'UTF-8',
+//                            'min'      => 1,
+//                            'max'      => 100,
+//                        ),
+//                    ),
+//                ),
+//            )));
            
               $inputFilter->add($factory->createInput(array(
                 'name'     => 'job_deadline',

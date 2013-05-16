@@ -21,19 +21,19 @@ echo '</h2>';
 echo $this->form()->openTag($form);
 echo $this->formRow($form->get('job_id'));
 
- echo '<div class="control-group">';
-    echo '<label class="control-label">job category id:</label>';
-        echo '<div class="controls">';
-            echo $this->formRow($form->get('jcat_id'));
-        echo '</div>';
-    echo '</div>';
+// echo '<div class="control-group">';
+//    echo '<label class="control-label">job category id:</label>';
+//        echo '<div class="controls">';
+//            echo $this->formRow($form->get('jcat_id'));
+//        echo '</div>';
+//    echo '</div>';
     
-    echo '<div class="control-group">';
-    echo '<label class="control-label">Category id:</label>';
-        echo '<div class="controls">';
-            echo $this->formRow($form->get('cat_id'));
-        echo '</div>';
-    echo '</div>';
+//    echo '<div class="control-group">';
+//    echo '<label class="control-label">Category id:</label>';
+//        echo '<div class="controls">';
+//            echo $this->formRow($form->get('cat_id'));
+//        echo '</div>';
+//    echo '</div>';
     echo '<div class="control-group">';
     echo '<label class="control-label">Job deadline:</label>';
         echo '<div class="controls">';
@@ -51,3 +51,9 @@ echo $this->formRow($form->get('job_id'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 echo '</div>';
+?>
+<script type="text/javaScript">
+    $(function() {
+     $(".datepicker").datepicker();
+   });
+</script>>

@@ -29,10 +29,11 @@ class JobsTable
         return $row;
     }
 
-    public function saveJobs(Jobs $jobs)
+    public function saveJobs(Jobs $jobs,$lastid)
     {
+        echo $lastid;
         $data = array(
-            'jcat_id' => $jobs->jcat_id,
+            'jcat_id' => $lastid,
             'job_deadline' => $jobs->job_deadline,
             'job_description' => $jobs->job_description,
         );
@@ -40,9 +41,11 @@ class JobsTable
         $job_id = (int)$jobs->job_id;
         if ($job_id == 0) {
             $this->tableGateway->insert($data);
+            
         } else {
+            echo 'dddddd';
             if ($this->getJobs($job_id)) {
-                $this->tableGateway->update($data, array('job_id' => $job_id));
+                $this->tableGateway->update(array('job_id'=>$job_id));
             } else {
                 throw new \Exception('Form id does not exist');
             }

@@ -21,6 +21,7 @@ class JobController extends AbstractActionController
     protected $jobcategoryTable;
     protected $categoryTable;
     protected $subjectTable;
+    protected $lastId;
 
     // view job list in file index
     public function indexAction()
@@ -29,7 +30,6 @@ class JobController extends AbstractActionController
             'dd' =>array(
                     'jobs' => $this->getJobsTable()->fetchAll(),
                     'subjects' => $this->getSubjectTable()->fetchAll(),
-                    'lastid' =>  $this->getJobcategoryTable()-> getLastInsertid(),
             )
         ));
     }
@@ -37,39 +37,27 @@ class JobController extends AbstractActionController
     public function addAction()
     {
          $form = new JobForm();
-        $form1 = new JobcategoryForm();
-       
-        
+        $form1 = new JobcategoryForm();   
         $form1->get('submit')->setValue('Add');
         $form->get('submit')->setValue('Add');
-        
         $request = $this->getRequest();
-        
-        if ($request->isPost()) {
-            
+        if ($request->isPost()) {     
             $jobcategory = new Jobcategory();  
-            $jobs = new Jobs();
-            
-            $form1->setInputFilter($jobcategory->getInputFilter());
-            $form->setInputFilter($jobs->getInputFilter());
-            
+            $jobs = new Jobs();      
+            $form1->setInputFilter($jobcategory->getInputFilter());     
+            $form->setInputFilter($jobs->getInputFilter());       
             $form->setData($request->getPost());
             $form1->setData($request->getPost());
-            
-           if ($form1->isValid()) {
-               
+           if ($form1->isValid()) {         
                 $jobcategory->exchangeArray($form1->getData());
-                 $this->getJobcategoryTable()->saveJobcategory($jobcategory); 
-               
-                    if($form->isValid()){
-                        $jobs->exchangeArray($form->getData());
-                        $this->getJobsTable()->saveJobs($jobs);
-                        
+                $lastid = $this->getJobcategoryTable()->saveJobcategory($jobcategory); 
+                if($form->isValid()){
+                    $jobs->exchangeArray($form->getData());
+                    $this->getJobsTable()->saveJobs($jobs,$lastid);
                         return $this->redirect()->toRoute('jobs');
-                    }
+                }
            }
         }
-        
         return array(
             'form' => $form,
             'dd' =>array(
@@ -106,7 +94,10 @@ class JobController extends AbstractActionController
             $form->setInputFilter($jobs->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->getJobsTable()->saveJobs($form->getData());
+//                echo '<pre>';
+//                print_r($form);
+//                echo '</pre>';
+                $this->getJobsTable()->saveJobs($form->getData(),NULL);
                 // Redirect to list of job
                 return $this->redirect()->toRoute('jobs');
             }
@@ -170,5 +161,7 @@ class JobController extends AbstractActionController
         }
         return $this->subjectTable;
     }
+   
+            
    
 }

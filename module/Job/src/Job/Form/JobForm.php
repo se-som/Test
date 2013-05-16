@@ -54,10 +54,9 @@ class JobForm extends Form
         
         $this->add(array(
             'name' => 'job_deadline',
-            'type' => 'Zend\Form\Element\Date',
+            'type' => 'text',
             'attributes' => array(
-                'class' => 'date',
-                'id' => 'endDate',
+                'class' => 'datepicker',
                 'min' => '2012-01-01',
                 'max' => '2020-01-01',
                 'step' => '1'

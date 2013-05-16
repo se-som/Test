@@ -41,6 +41,8 @@ class JobcategoryTable
         $com_cat_id = (int)$jobcategory->com_cat_id;
         if ($com_cat_id == 0) {
             $this->tableGateway->insert($data);
+            $LastIdInsert = $this->tableGateway->getLastInsertValue();
+            return $LastIdInsert;  
         } else {
             if ($this->getJobcategory($com_cat_id)) {
                 $this->tableGateway->update($data, array('com_cat_id' => $com_cat_id));
