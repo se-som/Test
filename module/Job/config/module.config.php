@@ -55,6 +55,21 @@ return array(
 					),
 				),
 			),
+                    'student' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/student[/:action][/:id]',
+					'constraints' => array(
+                                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                            'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                            'controller' => 'Job\Controller\Job',
+                                            'action'     => 'student',
+					),
+				),
+			),
+                
                         // action job/add
 			'add' => array(
 				'type'    => 'segment',
@@ -85,7 +100,7 @@ return array(
 					),
 				),
 			),
-                        // action company/detail
+                        // action jobs/detail
                         'detail' => array(
                             'type'    => 'segment',
                             'options' => array(
@@ -100,6 +115,7 @@ return array(
                                     ),
 				),
 			),
+                        
                     ),
             ),
                 
@@ -417,6 +433,20 @@ return array(
 					'defaults' => array(
                                                 'controller' => 'Job\Controller\Job',
 						'action'     => 'add',
+					),
+				),
+			),
+			'addcompany' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/addcompany[/:action][/:id]',
+					'constraints' => array(
+						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
+					),
+					'defaults' => array(
+                                                'controller' => 'Job\Controller\Job',
+						'action'     => 'addcompany',
 					),
 				),
 			),

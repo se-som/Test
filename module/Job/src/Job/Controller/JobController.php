@@ -13,6 +13,7 @@ use Zend\View\Model\ViewModel;
 use Job\Model\Jobcategory;
 use Job\Model\Jobs;   
 use Job\Form\JobForm;
+use Job\Form\CompanyForm;
 use Job\Form\JobcategoryForm;
 
 class JobController extends AbstractActionController
@@ -34,6 +35,7 @@ class JobController extends AbstractActionController
         ));
     }
     // action add job  
+   
     public function addAction()
     {
          $form = new JobForm();
@@ -129,6 +131,7 @@ class JobController extends AbstractActionController
             'jobs' => $this->getJobsTable()->getJobs($job_id)
         );
     }
+     
     public function getJobsTable()
     {
         if (!$this->jobTable) {
@@ -161,6 +164,44 @@ class JobController extends AbstractActionController
         }
         return $this->subjectTable;
     }
+   public function addcompanyAction()
+    {
+         $per_id = (int) $this->params()->fromRoute('id', 1);
+        if (!$per_id) 
+            {
+                return $this->redirect()->toRoute('addcompany', array(
+                    'action' => 'add'
+                ));
+            }
+         try {
+            $addcompany = $this->getcompanyTable()->getCompany($per_id);
+        }
+        catch (\Exception $ex) {
+            return $this->redirect()->toRoute('addcompany', array(
+                'action' => 'index',
+            ));
+        }
+        
+        $form  = new CompanyForm();
+        $form->bind($addcompany);
+        $form->get('submit')->setAttribute('value', 'Edit');
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($addcompany->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->getCompanyTable()->saveCompany($form->getData(),NULL);
+                // Redirect to list of job
+                return $this->redirect()->toRoute('jobs');
+            }
+        }
+        return array(
+            'id' => $per_id,
+            'form' => $form,
+            );
+    }
+    
    
             
    

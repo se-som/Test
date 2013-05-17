@@ -31,6 +31,8 @@ class CompanyTable
     public function saveCompany(Company $company)
     {
         $data = array(
+            'user_id' => $company->user_id,
+            'approve' => $company->approve,
             'com_name' => $company->com_name,
             'com_phone'  => $company->com_phone,
             'com_email' => $company->com_email,

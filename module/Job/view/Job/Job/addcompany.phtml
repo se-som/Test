@@ -1,13 +1,13 @@
 <?php
-// module/Job/view/Job/Category/add.phtml:
+// module/Job/view/Job/Jobcategory/addcompany.phtml:
 
-$title = 'Add new company';
+$title = 'Edit your company';
 $this->headTitle($title);
 ?>
 
 <?php
 $form = $this->form;
-$form->setAttribute('action', $this->url('company/add', array('action' => 'add')));
+$form->setAttribute('action', $this->url('jobs/addcompany', array('action' => 'addcompany')));
 $form->prepare();
 
 echo '<div class="label">';
@@ -15,15 +15,14 @@ echo '<h2 class ="ui-widget-header">';
     echo $this->escapeHtml($title);
 echo '</h2>';
 
-//echo'<form class="form-horizontal">';
-echo $this->form()->openTag($form);
-
-  echo '<div class="control-group">';
+echo $this->form()->openTag($form); 
+    echo '<div class="control-group">';
     echo '<label class="control-label">user id:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('user_id'));
         echo '</div>';
     echo '</div>';
+    
     echo '<div class="control-group">';
     echo '<label class="control-label">approve:</label>';
         echo '<div class="controls">';
@@ -36,28 +35,37 @@ echo $this->form()->openTag($form);
             echo $this->formRow($form->get('com_name'));
         echo '</div>';
     echo '</div>';
+     
+
+       
     echo '<div class="control-group">';
-    echo '<label class="control-label">company location:</label>';
+    echo '<label class="control-label">comapany location:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('com_location'));
         echo '</div>';
     echo '</div>';
+    
+  echo '<div class="control-group">';
+    echo '<label class="control-label">company phone:</label>';
+        echo '<div class="controls">';
+            echo $this->formRow($form->get('com_phone'));
+        echo '</div>';
+    echo '</div>';
     echo '<div class="control-group">';
-    echo '<label class="control-label">Company email:</label>';
+    echo '<label class="control-label">company email:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('com_email'));
         echo '</div>';
     echo '</div>';
     echo '<div class="control-group">';
-    echo '<label class="control-label">Company web site:</label>';
+    echo '<label class="control-label">company web site:</label>';
         echo '<div class="controls">';
             echo $this->formRow($form->get('com_web'));
         echo '</div>';
     echo '</div>';
-echo $this->formSubmit($form->get('submit'));
+    
+     
+   echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 echo '</div>';
-
-
-?>
-<!-- <style>.labels{text-align: right}</style> -->
+  

@@ -1,2 +1,44 @@
 <?php
-echo 'company profile view page';
+// module/Job/view/Job/Company/index.phtml:
+
+$title = 'My company';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<table class="table table-hover">
+<tbody>
+
+<?php 
+foreach ($companies as $company) :?>
+    <tr>
+         <td><?php echo $this->escapeHtml($company->com_id);?></td>
+        <td><?php echo $this->escapeHtml($company->com_name);?></td>
+	<td>
+        <!-- edit and delete jobs -->
+        <a href="<?php echo $this->url('company/edit',array(
+            'action'=>'edit', 'id' => $company->com_id));?>">Edit</a>
+       
+        <a href="<?php echo $this->url('category/delete',array(
+            'action'=>'delete', 'id' => $company->com_id));?>">Delete</a>   
+    </td>
+    </tr>
+    
+<?php endforeach; ?>
+   
+    </tbody>
+</table>
+
+   <p>
+    <a href="<?php echo $this->url('company/add', array('action'=>'add'));?>">Add new company</a>
+</p>
+    
+
+   
+
+    
+   
+ 
+    
+    
+    
+        

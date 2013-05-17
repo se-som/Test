@@ -25,7 +25,12 @@ class PercentageController extends AbstractActionController
     public function indexAction()
     {
         return new ViewModel(array(
-            'percentages' => $this->getPercentageTable()->fetchAll(),
+            'subjects' => $this->getSubjectTable()->fetchAll(),
+            'percentages' => $this->getPercentageTable()->fetchAll(), 
+            'categories' => $this->getCategoryTable()->fetchAll(),
+            
+           
+            
         ));
     }
     // action add Subject  
@@ -49,9 +54,10 @@ class PercentageController extends AbstractActionController
         }
         return array(
             'form' => $form,
+            'subjects' => $this->getSubjectTable()->fetchAll(),
             'dd' =>array(
                 'percentages' => $this->getPercentageTable()->fetchAll(),
-                'subjects' => $this->getSubjectTable()->fetchAll(),
+                
                 'categories' => $this->getCategoryTable()->fetchAll(),
             )
             );

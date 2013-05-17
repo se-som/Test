@@ -17,6 +17,8 @@ use Job\Model\Subject;
 use Job\Model\SubjectTable;
 use Job\Model\Jobs;
 use Job\Model\JobsTable;
+use Job\Model\Company;
+use Job\Model\CompanyTable;
 use Job\Model\Jobcategory;
 use Job\Model\JobcategoryTable;
 use Job\Model\Percentage;
@@ -111,7 +113,18 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Percentage());
                     return new TableGateway('B_percentage', $dbAdapter, null, $resultSetPrototype);
-                },   
+                }, 
+                'Job\Model\CompanyTable' =>  function($sm) {
+                    $tableGateway = $sm->get('CompanyTableGateway');
+                    $table = new CompanyTable($tableGateway);
+                    return $table;
+                },
+                'CompanyTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Company());
+                    return new TableGateway('A_company', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
         );
     }
